@@ -1,7 +1,7 @@
 import React from "react";
-import build from '../build.svg'
 import Register from "../Register/Register";
 import Authorization from '../Authorization/Authorization';
+import Reception from '../Reception/Reception'
 import {
     Switch,
     Route,
@@ -14,10 +14,11 @@ import './style.css'
 function RegisterDiv() {
     return (
         <div id='registerDiv'>
-            <div id='divBuild'><img src={build} alt='Нема пикчи' id='build'></img></div>
             <Switch>
-                <Route path='/Register/Register' component={Register} />
-                <Route path='/Authorization/Authorization' component={Authorization} />
+                <Route path='/Register' component={Register} />
+                <Route path='/Authorization' component={Authorization} />
+                <Route path='/Reception' component={Reception} />
+                <Redirect from='/' to='/Authorization/Authorization' />
             </Switch>
         </div>
     )

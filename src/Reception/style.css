@@ -1,0 +1,74 @@
+#reception {
+    position: absolute;
+width: 100%;
+height: 122px;
+left: 0px;
+top: 127px;
+
+background: #C5E9FF;
+box-shadow: 4px 4px 4px 4px rgba(0, 0, 0, 0.25);
+display: flex;
+flex-direction: row;
+justify-content: space-evenly;
+/* align-items: center; */
+
+}
+/* #build {
+    display: none;
+} */
+.receptionMenu {
+    display: flex;
+    flex-direction: column;
+}
+
+.edit {
+    /* position: absolute; */
+width: 131px;
+height: 45px;
+left: 835px;
+top: 180px;
+
+background: #FFFFFF;
+border: 1px solid rgba(0, 0, 0, 0.2);
+box-sizing: border-box;
+border-radius: 4px;
+margin-top: 57px;
+
+font-family: Roboto;
+font-style: normal;
+font-weight: 300;
+font-size: 18px;
+line-height: 21px;
+}
+
+.receprionInput {
+    /* position: absolute; */
+width: 300px;
+height: 45px;
+left: 623px;
+top: 180px;
+
+background: #FFFFFF;
+border: 1px solid rgba(0, 0, 0, 0.2);
+box-sizing: border-box;
+border-radius: 4px;
+}
+
+.pReception {
+    font-family: Roboto;
+font-style: normal;
+font-weight: 300;
+font-size: 18px;
+line-height: 21px;
+}
+
+.receptionMiddle {
+    /* width: 100%; */
+    display: flex;
+    align-items: center;
+    position: absolute;
+    /* width: 100%; */
+    top: 260px;
+  
+    /* margin-right: 812px; */
+}

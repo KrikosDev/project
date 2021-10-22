@@ -2,9 +2,16 @@
     display: flex;
     flex-direction: column ;
     padding: 60px;
+    /* margin-left: 50%; */
 }
 
-input {
+.boxRegister {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.inputRegis {
     /* position: absolute; */
 width: 100%;
 height: 40px;
@@ -25,11 +32,11 @@ font-size: 18px;
 line-height: 21px;
 }
 
-#buttomRegis {
+#buttonRegistration {
     padding: 10px;
-    padding-left: 18px ;
-    margin-top: 100px;
-    margin-left: 64.5%;
+    /* padding-left: 18px ; */
+    margin-top: 60px;
+    margin-left: 56.5%;
     width: 195px;
     height: 40px;
     left: 702px;
@@ -39,15 +46,27 @@ line-height: 21px;
     border: 1px solid rgba(0, 0, 0, 0.2);
     box-sizing: border-box;
     border-radius: 4px;
+
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 18px;
+    line-height: 21px;
 }
 
-#buttomAutores {
+#buttonAuthorization {
     margin-top: 30px;
-    margin-left: 77.5%;
+    margin-left: 72.5%;
+    text-decoration: none;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 18px;
+    line-height: 21px;
 }
 
-h2 {
-width: 212px;
+.regisH2 {
+/* width: 212px; */
 height: 42px;
 left: 596px;
 top: 198px;
@@ -61,4 +80,9 @@ margin: 0;
 margin-bottom: 20px;
 margin-left: 70px;
 
+}
+
+.pAuthoriz {
+    text-decoration: none;
+    color: black;
 }
