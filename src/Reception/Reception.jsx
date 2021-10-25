@@ -11,10 +11,11 @@ import {
 import { medics } from '../Constans'
 import Sort from '../Sort/Sort'
 import './style.css'
+import Table from '../Table/Table'
 
 function Reception() {
     return (
-        <div>
+        <div className='receptionBig'>
             <div id='reception'>
                 <div className='receptionMenu'>
                     <p className='pReception'>Имя:</p>
@@ -39,9 +40,10 @@ function Reception() {
                 <button className='edit'>Добавить</button>
             </div>
             <div className='receptionMiddle'>
-                            <Sort />
-                            
+                <Sort />
+
             </div>
+            <Table />
         </div>
     )
 }
