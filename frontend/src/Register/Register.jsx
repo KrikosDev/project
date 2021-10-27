@@ -24,6 +24,7 @@ function Register() {
                     className='inputRegis'
                     placeholder='Login'
                     min="6"
+                    name='login'
                 />
 
                 <p className='p'>
@@ -34,6 +35,7 @@ function Register() {
                     className='inputRegis'
                     placeholder='Password'
                     min="6"
+                    name='Password'
                 />
                 <p className='p'>Repeat password:</p>
                 <input
@@ -41,6 +43,7 @@ function Register() {
                     className='inputRegis'
                     placeholder='Password'
                     min="6"
+                    name='Password'
                 />
                 <button id='buttonRegistration'>
                     Зарегистрироваться

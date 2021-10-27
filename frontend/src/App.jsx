@@ -1,13 +1,25 @@
-import React from 'react';
 import './App.css';
-import MainDiv from './MainDiv/MainDiv';
+import React from "react";
+import Header from "./Header/Header";
+import RegisterDiv from "./Body/RegisterDiv";
+import {
+  Switch,
+  Route,
+  Link,
+  Redirect
+} from 'react-router-dom';
+import { BrowserRouter as Router } from 'react-router-dom';
 
 function App() {
+  const routes = RegisterDiv(false)
   return (
-    <div id='app'>
-      <MainDiv />
-    </div>
-  );
+    <Router>
+      <div id='app'>
+        <Header />
+        {routes}
+      </div>
+    </Router>
+  )
 }
 
 export default App;

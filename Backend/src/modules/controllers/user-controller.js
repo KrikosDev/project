@@ -41,7 +41,7 @@ module.exports.createNewUser = (
         }
     })
 
-module.exports.createNewUser = (
+module.exports.authorization = (
     [
         check('login', 'Введите корректный логин').exists(),
         check('password', 'Введите корректный пароль').exists()

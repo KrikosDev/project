@@ -10,6 +10,6 @@ const {
   } = require('../controllers/user-controller');
 
 router.post('/createNewUser', createNewUser);
-router.post('/createNewUser', createNewUser);
+router.post('/authorization', authorization);
 
 module.exports = router;
