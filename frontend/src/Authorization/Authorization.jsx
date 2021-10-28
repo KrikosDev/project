@@ -1,24 +1,55 @@
-import React, {useState} from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import build from '../build.svg'
 import './style.css';
 import {
     Switch,
     Route,
     Link,
-    Redirect
+    Redirect,
+    useHistory
 } from 'react-router-dom';
+import axios from 'axios';
+import { useMessage } from "../hooks/message.hook";
+import M from 'materialize-css';
 
-function Register() {
-    const [form, setForm] = useState({
-        login: '',
-        password: ''
-    })
+function Authorization() {
+    const clearError = useCallback(() => setError(null), [])
+    const message = useMessage()
+    const [error, setError] = useState();
+    const [login, setLogin] = useState("")
+    const [password, setPassword] = useState("")
+    let history = useHistory();
 
-    const changeHandler = e => {
-        setForm({ ...form, [e.target.name]: e.target.value })
-    }
+    useEffect(() => {
+        message(error)
+        clearError()
+    }, [error, message, clearError])
 
-    console.log(form)
+    const authorizationUser = async () => {
+        try {
+            await axios
+                .post(`http://localhost:8000/user/authorization`, {
+                    login,
+                    password,
+                })
+                .then((result) => {
+                    localStorage.setItem('user_id', result.data.result._id)
+                    localStorage.setItem('token', result.data.Token)
+                    history.push('/Reception')
+                })
+                .catch((e) => {
+                    if (e.response.status === 402) {
+                        alert('Некорректный пароль')
+                    }
+                    if (e.response.status === 404) {
+                        alert(`Пользователя ${login} не существует, пройдите регистрацию`)
+                    }
+                })
+        } catch (e) {
+            setError(e.message)
+            throw e
+        }
+}
 
     return (
         <div class='boxAuthoris'>
@@ -31,7 +62,7 @@ function Register() {
                     className='inputRegis'
                     placeholder='Login'
                     name='login'
-                    onChange={changeHandler}
+                    onChange={(e) => setLogin(e.target.value)}
                 >
                 </input>
                 <p className='p'>Password:</p>
@@ -40,14 +71,19 @@ function Register() {
                     className='inputRegis'
                     placeholder='Password'
                     name='password'
-                    onChange={changeHandler}
+                    onChange={(e) => setPassword(e.target.value)}
                 >
                 </input>
-                <button id='buttonAuthoris'>Войти</button>
+                <button
+                    id='buttonAuthoris'
+                    onClick={() => authorizationUser()}
+                >
+                    Войти
+                </button>
                 <p id='buttonRegis'><Link to='/Register/Register' className='pRegis'>Зарегистрироваться</Link></p>
             </div>
         </div>
     )
 }
 
-export default Register
+export default Authorization

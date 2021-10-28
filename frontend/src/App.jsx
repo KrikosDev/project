@@ -9,9 +9,10 @@ import {
   Redirect
 } from 'react-router-dom';
 import { BrowserRouter as Router } from 'react-router-dom';
+import M from 'materialize-css';
 
 function App() {
-  const routes = RegisterDiv(false)
+  const routes = RegisterDiv(true)
   return (
     <Router>
       <div id='app'>

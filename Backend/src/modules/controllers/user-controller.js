@@ -1,92 +1,68 @@
 // const config = require('config')
-const bcrypt = require('bcryptjs')
+const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 const User = require('../models/User-model')
 const { check, validationResult } = require('express-validator')
 
-module.exports.createNewUser = (
-    [
-        check('login', 'Логин должен состоять миниум из 6 символов').isLength({ min: 6 }),
-        check('password', 'Пароль должен состоять миниум из 6 символов').isLength({ min: 6 })
-    ],
+module.exports.createNewUser =
+    // [
+    //     check('login', 'Логин должен состоять миниум из 6 символов').isLength({ min: 6 }),
+    //     check('password', 'Пароль должен состоять миниум из 6 символов').isLength({ min: 6 })
+    // ],
+
     async (req, res) => {
-        try {
-            const errors = validationResult(req)
+        const body = req.body;
+        console.log(body)
+        const hashPass = await bcrypt.hashSync(body.password, 12);
+        const Token = jwt.sign({ user_id: User._id }, process.env.TOKEN_KEY, {
+            expiresIn: "60m",
+        });
 
-            if (!errors.isEmpty()) {
-                return res.status(400).json({
-                    errors: errors.array(),
-                    message: 'Некорректные данные при регистрации'
-                })
-            }
-
-            const { login, password } = req.body
-
-            const candidate = await User.findOne({ login })
-
-            if (candidate) {
-                return res.status(400).json({ message: 'Такой пользователь уже существует, попробуйте авторизоваться' })
-            }
-
-            const hashedPassword = await bcrypt.hash(password, 12)
-            const user = new User({ login, password: hashedPassword })
-
-            await user.save()
-
-            res.status(201).json({ message: 'Пользователь создан' })
-
-
-        } catch (e) {
-            res.status(500).json({ message: 'Что-то пошло не так, попробуйте снова' })
+        if (body.hasOwnProperty("login") && body.hasOwnProperty("password")) {
+            User.findOne({
+                login: body.login
+            })
+                .then((result) => {
+                    if (result === null) {
+                        const user = new User({
+                            login: body.login,
+                            password: hashPass,
+                        });
+                        user.save().then((result) => {
+                            res.status(200).send({ Token, user });
+                        });
+                    } else {
+                        res.status(400).send(`Ошибка`);
+                    }
+                });
+        } else {
+            return res.status(422).send("Не был введён логин или пароль");
         }
-    })
+    };
 
-module.exports.authorization = (
-    [
-        check('login', 'Введите корректный логин').exists(),
-        check('password', 'Введите корректный пароль').exists()
-    ],
-    async (req, res) => {
-        try {
-            const errors = validationResult(req)
-
-            if (!errors.isEmpty()) {
-                return res.status(400).json({
-                    errors: errors.array(),
-                    message: 'Некорректные данные при регистрации'
-                })
+module.exports.authorization = (req, res) => {
+    const body = req.body;
+    const Token = jwt.sign({ user_id: User._id }, process.env.TOKEN_KEY, {
+        expiresIn: "60m",
+    });
+    if (body.hasOwnProperty("login") && body.hasOwnProperty("password")) {
+        User.findOne({
+             login: body.login 
+            })
+            .then((result) => {
+            if (result !== null) {
+                const hashPassword = bcrypt.compareSync(body.password, result.password);
+                delete result._doc.password;
+                if (hashPassword) {
+                    res.status(200).send({ Token, result });
+                } else {
+                    res.status(402).send("Неверный пароль");
+                }
+            } else {
+                res.status(404).send("Пользователь отсутствует");
             }
-
-            const { login, password } = req.body
-
-            const user = await User.findOne({ login })
-
-            if (!user) {
-                return res.status(400)({ message: 'Пользователь не найден' })
-            }
-
-            const isMatch = await bcrypt.compare(password, user.password)
-
-            if (!isMatch) {
-                return res.status(400)({ message: 'Неверный пароль' })
-            }
-
-            // const token = jwt.sign(
-            //     { userId: user.id },
-            //     config.get('jwtSecret'),
-            //     { expiresIn: '1h' }
-            // )
-
-            const Token = jwt.sign(
-                { user_id: User._id },
-                process.env.TOKEN_KEY,
-                { expiresIn: "30m", }
-            );
-
-            res.json({ token, userId: user.id })
-
-        } catch (e) {
-            res.status(500).json({ message: 'Что-то пошло не так, попробуйте снова' })
-        }
+        });
+    } else {
+        res.status(400).send("Ошибка");
     }
-)
+};
