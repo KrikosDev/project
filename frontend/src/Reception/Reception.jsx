@@ -6,7 +6,8 @@ import {
     Switch,
     Route,
     Link,
-    Redirect
+    Redirect,
+    useHistory
 } from 'react-router-dom';
 import { medics } from '../Constans'
 import Sort from '../Sort/Sort'
@@ -14,6 +15,11 @@ import './style.css'
 import Table from '../Table/Table'
 
 function Reception() {
+    const token = localStorage.getItem('token')
+    const history = useHistory()
+    if (!token) {
+        history.goBack();
+    }
     return (
         <div className='receptionBig'>
             <div id='reception'>

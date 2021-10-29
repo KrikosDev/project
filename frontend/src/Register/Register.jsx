@@ -9,13 +9,9 @@ import {
     useHistory
 } from 'react-router-dom';
 import axios from "axios";
-import { useMessage } from "../hooks/message.hook";
 import M from 'materialize-css';
 
 function Registration() {
-    const clearError = useCallback(() => setError(null), [])
-    const message = useMessage()
-    const [error, setError] = useState();
     const [login, setLogin] = useState("");
     const [password, setPassword] = useState("");
     const [repeatPassword, setRepeatPassword] = useState("");
@@ -24,13 +20,7 @@ function Registration() {
     const checkContent = /(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]/;
     let history = useHistory();
 
-    useEffect(() => {
-        message(error)
-        clearError()
-    }, [error, message, clearError])
-
     const createUser = async () => {
-        try {
             if (checkLength.test(login)) {
                 if (
                     checkLang.test(password) &&
@@ -49,8 +39,9 @@ function Registration() {
                                 history.push('/Reception');
                             })
                             .catch((e) => {
-                                setError(e.message)
-                                throw e
+                                alert (
+                                    'Ошибка'
+                                )
                             })
                     } else {
                         alert('Проверьте правильность введенных данных');
@@ -58,17 +49,17 @@ function Registration() {
 
                 } else {
                     alert(
-                        `Пароль должен состоять только из латинских букв и иметь хотя бы 1 цифру`
+                        `Пароль должен состоять только из латинских букв, быть длинной не менее 6 символов и иметь хотя бы 1 цифру`
                     );
                 }
 
             } else {
-                M.toast({ html: `Привет, Нео`, class: 'modal-trigger' })
+                alert(
+                    'Короткий логин'
+                )
+                // M.toast({ html: `Привет, Нео`, class: 'modal-trigger' })
             }
-        } catch (e) {
-            setError(e.message)
-            throw e
-        }
+        
     }
 
 

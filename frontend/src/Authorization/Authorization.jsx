@@ -13,20 +13,11 @@ import { useMessage } from "../hooks/message.hook";
 import M from 'materialize-css';
 
 function Authorization() {
-    const clearError = useCallback(() => setError(null), [])
-    const message = useMessage()
-    const [error, setError] = useState();
     const [login, setLogin] = useState("")
     const [password, setPassword] = useState("")
     let history = useHistory();
 
-    useEffect(() => {
-        message(error)
-        clearError()
-    }, [error, message, clearError])
-
     const authorizationUser = async () => {
-        try {
             await axios
                 .post(`http://localhost:8000/user/authorization`, {
                     login,
@@ -45,10 +36,6 @@ function Authorization() {
                         alert(`Пользователя ${login} не существует, пройдите регистрацию`)
                     }
                 })
-        } catch (e) {
-            setError(e.message)
-            throw e
-        }
 }
 
     return (

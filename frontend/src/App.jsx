@@ -12,7 +12,7 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import M from 'materialize-css';
 
 function App() {
-  const routes = RegisterDiv(true)
+  const routes = RegisterDiv()
   return (
     <Router>
       <div id='app'>

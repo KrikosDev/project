@@ -1,14 +1,23 @@
-import React from "react";
+import React, { useState } from "react";
 import './style.css'
 import bandAid from '../band-aid.svg'
 import {
     Switch,
     Route,
     Link,
-    Redirect
+    Redirect,
+    useHistory
 } from 'react-router-dom';
 
 function Header() {
+    const history = useHistory();
+
+    const deleteHistory = () => {
+        localStorage.removeItem('token')
+        localStorage.removeItem('user_id')
+        history.push("/Authorization")
+    }
+
     return (
         <div id='header'>
             <img src={bandAid} alt='Пикчи нет' className='bandAid'></img>
@@ -21,7 +30,7 @@ function Header() {
                     </Route>
                     <Route path="/Reception">
                         <h1>Приёмы</h1>
-                        <button className='exit'>Выход</button>
+                        <button className='exit' onClick={() => deleteHistory()}>Выход</button>
                     </Route>
                 </Switch>
         </div>

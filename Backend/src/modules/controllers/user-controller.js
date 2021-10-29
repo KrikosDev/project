@@ -42,6 +42,7 @@ module.exports.createNewUser =
 
 module.exports.authorization = (req, res) => {
     const body = req.body;
+    console.log(body);
     const Token = jwt.sign({ user_id: User._id }, process.env.TOKEN_KEY, {
         expiresIn: "60m",
     });

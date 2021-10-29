@@ -6,43 +6,46 @@ import {
     Switch,
     Route,
     Link,
-    Redirect
+    Redirect,
+    useHistory
 } from 'react-router-dom';
 
 import './style.css'
 
-const RegisterDiv = isAuthenticated => {
-    if (isAuthenticated) {
+const RegisterDiv = () => {
+    const history = useHistory()
+    const test = localStorage.getItem('token')
+    console.log(test);
+
+    if (test) {
         return (
             <div id='registerDiv'>
                 <Switch>
-                    <Route path='/Reception'  component={Reception}>
+                    <Route path='/Reception' component={Reception}>
                         <Reception />
                     </Route>
                     <Route path='/Authorization' component={Authorization}>
-                    <Authorization />
-                </Route>
-                <Route path='/Register' component={Register}>
-                    <Register />
-                </Route>
-                    <Redirect to='/Authorization' />
+                        <Authorization />
+                    </Route>
+                    <Redirect to='/Reception' />
                 </Switch>
-                
             </div>
         )
     }
-
     return (
         <div id='registerDiv'>
             <Switch>
                 <Route path='/Authorization' component={Authorization}>
                     <Authorization />
                 </Route>
+                <Route path='/Register' component={Register}>
+                    <Register />
+                </Route>
                 <Redirect to='/Authorization' />
             </Switch>
         </div>
     )
-    // return (
+    {/* // return (
     //     <div id='registerDiv'>
 
     //         <Switch>
@@ -52,7 +55,7 @@ const RegisterDiv = isAuthenticated => {
     //             <Redirect from='/' to='/Authorization/Authorization' />
     //         </Switch>
     //     </div>
-    // )
+    // ) */}
 }
 
 export default RegisterDiv
