@@ -16,6 +16,7 @@ function Header() {
         localStorage.removeItem('token')
         localStorage.removeItem('user_id')
         history.push("/Authorization")
+        // history.goBack();
     }
 
     return (

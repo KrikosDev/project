@@ -31,20 +31,21 @@ const RegisterDiv = () => {
                 </Switch>
             </div>
         )
+    } else {
+        return (
+            <div id='registerDiv'>
+                <Switch>
+                    <Route path='/Authorization' component={Authorization}>
+                        <Authorization />
+                    </Route>
+                    <Route path='/Register' component={Register}>
+                        <Register />
+                    </Route>
+                    <Redirect to='/Authorization' />
+                </Switch>
+            </div>
+        )
     }
-    return (
-        <div id='registerDiv'>
-            <Switch>
-                <Route path='/Authorization' component={Authorization}>
-                    <Authorization />
-                </Route>
-                <Route path='/Register' component={Register}>
-                    <Register />
-                </Route>
-                <Redirect to='/Authorization' />
-            </Switch>
-        </div>
-    )
     {/* // return (
     //     <div id='registerDiv'>
 

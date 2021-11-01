@@ -18,25 +18,25 @@ function Authorization() {
     let history = useHistory();
 
     const authorizationUser = async () => {
-            await axios
-                .post(`http://localhost:8000/user/authorization`, {
-                    login,
-                    password,
-                })
-                .then((result) => {
-                    localStorage.setItem('user_id', result.data.result._id)
-                    localStorage.setItem('token', result.data.Token)
-                    history.push('/Reception')
-                })
-                .catch((e) => {
-                    if (e.response.status === 402) {
-                        alert('Некорректный пароль')
-                    }
-                    if (e.response.status === 404) {
-                        alert(`Пользователя ${login} не существует, пройдите регистрацию`)
-                    }
-                })
-}
+        await axios
+            .post(`http://localhost:8000/user/authorization`, {
+                login,
+                password,
+            })
+            .then((result) => {
+                localStorage.setItem('user_id', result.data.result._id)
+                localStorage.setItem('token', result.data.Token)
+                history.push('/Reception')
+            })
+            .catch((e) => {
+                if (e.response.status === 402) {
+                    alert('Некорректный пароль')
+                }
+                if (e.response.status === 404) {
+                    alert(`Пользователя ${login} не существует, пройдите регистрацию`)
+                }
+            })
+    }
 
     return (
         <div class='boxAuthoris'>
