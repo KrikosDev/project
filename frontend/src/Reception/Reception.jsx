@@ -14,6 +14,7 @@ import Sort from '../Sort/Sort'
 import './style.css'
 import Table from '../Table/Table'
 import axios from "axios";
+import DateFilter from '../DateSort/DateFilter'
 
 function Reception() {
     const [name, setName] = useState();
@@ -23,10 +24,7 @@ function Reception() {
     const checkLength = /^[:;,\-@0-9a-zA-Zâéè'.\s]{3,235}$/;
     const token = localStorage.getItem('token')
     const history = useHistory()
-
-    if (!token) {
-        history.goBack();
-    }
+    const [icon, setIcon] = useState(true)
 
     const createTask = async () => {
         if (checkLength.test(name) &&
@@ -39,7 +37,7 @@ function Reception() {
                     name,
                     doctor,
                     date,
-                    
+
                 })
                 .then((result) => {
                     localStorage.setItem('token', result.data.Token);
@@ -56,6 +54,10 @@ function Reception() {
                 'Должны быть заполнены все поля'
             )
         }
+    }
+
+    if (!token) {
+        history.goBack();
     }
 
     return (
@@ -96,11 +98,16 @@ function Reception() {
                 <button
                     className='edit'
                     onClick={() => createTask()}
-                >Добавить</button>
+                >
+                    Добавить
+                </button>
             </div>
             <div className='receptionMiddle'>
-                <Sort />
-
+                <Sort icon={icon} setIcon={setIcon} />
+            </div>
+            <div className='dateFilter'>
+                {!icon && <DateFilter setIcon={setIcon}/>
+                }
             </div>
             <Table />
         </div>

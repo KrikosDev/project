@@ -13,3 +13,8 @@ export const sortArr = [
     'Дата',
     'Врач'
 ]
+
+export const sortBy = [
+    'По возрастанию',
+    'По убыванию'
+]

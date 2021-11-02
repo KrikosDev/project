@@ -17,21 +17,21 @@ const RegisterDiv = () => {
     const test = localStorage.getItem('token')
     console.log(test);
 
-    if (test) {
-        return (
-            <div id='registerDiv'>
-                <Switch>
-                    <Route path='/Reception' component={Reception}>
-                        <Reception />
-                    </Route>
-                    <Route path='/Authorization' component={Authorization}>
-                        <Authorization />
-                    </Route>
-                    <Redirect to='/Reception' />
-                </Switch>
-            </div>
-        )
-    } else {
+    // if (test) {
+    //     return (
+    //         <div id='registerDiv'>
+    //             <Switch>
+    //                 <Route path='/Reception' component={Reception}>
+    //                     <Reception />
+    //                 </Route>
+    //                 <Route path='/Authorization' component={Authorization}>
+    //                     <Authorization />
+    //                 </Route>
+    //                 <Redirect to='/Reception' />
+    //             </Switch>
+    //         </div>
+    //     )
+    // } 
         return (
             <div id='registerDiv'>
                 <Switch>
@@ -41,11 +41,14 @@ const RegisterDiv = () => {
                     <Route path='/Register' component={Register}>
                         <Register />
                     </Route>
+                    <Route path='/Reception' component={Reception}>
+                        <Reception />
+                    </Route>
                     <Redirect to='/Authorization' />
                 </Switch>
             </div>
         )
-    }
+
     {/* // return (
     //     <div id='registerDiv'>
 

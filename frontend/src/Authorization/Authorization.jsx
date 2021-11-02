@@ -32,9 +32,12 @@ function Authorization() {
                 if (e.response.status === 402) {
                     alert('Некорректный пароль')
                 }
-                if (e.response.status === 404) {
+                else if (e.response.status === 404) {
                     alert(`Пользователя ${login} не существует, пройдите регистрацию`)
+                } else {
+                    alert ('Неизвестная ошибка')
                 }
+            
             })
     }
 
