@@ -15,44 +15,44 @@ import './style.css'
 import Table from '../Table/Table'
 import axios from "axios";
 import DateFilter from '../DateSort/DateFilter'
+import moment from "moment";
 
 function Reception() {
+    const [user_id] = useState(localStorage.getItem('user_id'));
     const [name, setName] = useState();
     const [doctor, setDoctor] = useState();
     const [date, setDate] = useState();
     const [complaints, setComplaints] = useState();
-    const checkLength = /^[:;,\-@0-9a-zA-Zâéè'.\s]{3,235}$/;
+    const checkLength = /^[:;,\-@0-9a-zA-Zâéè'.\s]{2,235}$/;
     const token = localStorage.getItem('token')
     const history = useHistory()
     const [icon, setIcon] = useState(true)
+    const [currentReception, setCurrentReception] = useState([])
+    const [reception, setReception] = useState([])
 
-    const createTask = async () => {
-        if (checkLength.test(name) &&
-            checkLength.test(doctor) &&
-            checkLength.test(date) &&
-            checkLength.test(complaints)
-        ) {
+    const createReception = async () => {
+        {
             await axios
-                .post(`http://localhost:8000/task/createNewTask`, {
+                .post(`http://localhost:8000/reception/createNewReception`, {
                     name,
                     doctor,
                     date,
-
+                    complaints,
+                    user_id,
                 })
-                .then((result) => {
-                    localStorage.setItem('token', result.data.Token);
-                    localStorage.setItem('user_id', result.data.user._id);
-                    history.push('/Reception');
+                .then((res) => {
+                    setCurrentReception(res.data.result)
+                    setName('')
+                    setDate('')
+                    setDoctor('')
+                    setComplaints('')
+                    console.log(res)
                 })
                 .catch((e) => {
                     alert(
-                        'Ошибка'
+                        `Ошибка ${e}`
                     )
                 })
-        } else {
-            alert(
-                'Должны быть заполнены все поля'
-            )
         }
     }
 
@@ -60,29 +60,37 @@ function Reception() {
         history.goBack();
     }
 
+    currentReception.map((item, index) => (
+        console.log(item)
+    ))
+
     return (
         <div className='receptionBig'>
             <div id='reception'>
                 <div className='receptionMenu'>
                     <p className='pReception'>Имя:</p>
                     <input
+                        value={name}
                         className='receprionInput'
                         onChange={(e) => setName(e.target.value)}
                     />
                 </div>
                 <div className='receptionMenu'>
                     <p className='pReception'>Врач:</p>
-                    <select className='receprionInput'>
+                    <select
+                        className='receprionInput'
+                        onChange={(e) => setDoctor(e.target.value)}
+                        value={doctor}
+                    >
                         {medics.map(item => (
-                            <option
-                                onChange={(e) => setDoctor(e.target.value)}
-                            >{item}</option>
+                            <option>{item}</option>
                         ))}
                     </select>
                 </div>
                 <div className='receptionMenu'>
                     <p className='pReception'>Дата:</p>
                     <input
+                        value={date}
                         type='date'
                         className='receprionInput'
                         onChange={(e) => setDate(e.target.value)}
@@ -91,13 +99,18 @@ function Reception() {
                 <div className='receptionMenu'>
                     <p className='pReception'>Жалобы:</p>
                     <input
+                        value={complaints}
                         className='receprionInput'
                         onChange={(e) => setComplaints(e.target.value)}
                     />
                 </div>
                 <button
                     className='edit'
-                    onClick={() => createTask()}
+                    onClick={() =>
+                        name && doctor && date && complaints
+                            ? createReception()
+                            : alert('Пропущено одно из полей')
+                    }
                 >
                     Добавить
                 </button>
@@ -106,10 +119,25 @@ function Reception() {
                 <Sort icon={icon} setIcon={setIcon} />
             </div>
             <div className='dateFilter'>
-                {!icon && <DateFilter setIcon={setIcon}/>
+                {
+                    !icon && <DateFilter setIcon={setIcon} />
                 }
             </div>
             <Table />
+            <div className='tableDiv'>
+                <table className='tableReception'>
+                    {currentReception.map((item, index) => (
+                        <tr className='trTableReception' key={`tr-${index}`}>
+                            <th>{item.name}</th>
+                            <th>{item.doctor}</th>
+                            <th>{`${moment(item.date).format("DD.MM.YYYY")}`}</th>
+                            <th>{item.complaints}</th>
+                            <th></th>
+                        </tr>
+                    )
+                    )}
+                </table>
+            </div>
         </div>
     )
 }

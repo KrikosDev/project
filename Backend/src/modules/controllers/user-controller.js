@@ -42,27 +42,26 @@ module.exports.createNewUser =
 
 module.exports.authorization = (req, res) => {
     const body = req.body;
-    console.log(body);
     const Token = jwt.sign({ user_id: User._id }, process.env.TOKEN_KEY, {
         expiresIn: "60m",
     });
     if (body.hasOwnProperty("login") && body.hasOwnProperty("password")) {
         User.findOne({
-             login: body.login 
-            })
+            login: body.login
+        })
             .then((result) => {
-            if (result !== null) {
-                const hashPassword = bcrypt.compareSync(body.password, result.password);
-                delete result._doc.password;
-                if (hashPassword) {
-                    res.status(200).send({ Token, result });
+                if (result !== null) {
+                    const hashPassword = bcrypt.compareSync(body.password, result.password);
+                    delete result._doc.password;
+                    if (hashPassword) {
+                        res.status(200).send({ Token, result });
+                    } else {
+                        res.status(402).send("Неверный пароль");
+                    }
                 } else {
-                    res.status(402).send("Неверный пароль");
+                    res.status(404).send("Пользователь отсутствует");
                 }
-            } else {
-                res.status(404).send("Пользователь отсутствует");
-            }
-        });
+            });
     } else {
         res.status(400).send("Ошибка");
     }

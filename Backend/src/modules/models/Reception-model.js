@@ -1,6 +1,6 @@
 const {Schema, model, Types} = require('mongoose')
 
-const taskScheme = new Schema({
+const receptionScheme = new Schema({
     name: {type: String, unique: true, required: true},
     doctor: {type: String, required: true},
     date: {type: Date, required: true},
@@ -8,4 +8,4 @@ const taskScheme = new Schema({
     user_id: String
 })
 
-module.exports = model('Task', taskScheme)
+module.exports = model('Reception', receptionScheme)

@@ -10,6 +10,7 @@ const app = express()
 app.use(cors());
 app.use(bodyParser.json());
 app.use('/user', require('./src/modules/routes/user-routes'))
+app.use('/reception', require('./src/modules/routes/reception-routes'))
 
 const PORT = process.env.PORT;
 
