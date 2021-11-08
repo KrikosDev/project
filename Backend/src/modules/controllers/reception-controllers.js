@@ -3,10 +3,11 @@ const jwt = require('jsonwebtoken')
 const Reception = require('../models/Reception-model')
 const { check, validationResult } = require('express-validator')
 
-module.exports.getReceptions = async (req, res, next) => {
-    await Reception.find({ user_id: req.query.user_id }).then((result) => {
-        res.send({ result })
-    })
+module.exports.getReceptions = async (req, res) => {
+    await Reception.find({ user_id: req.query.user_id })
+        .then((result) => {
+            res.send({ result })
+        })
 };
 
 module.exports.createNewReception = async (req, res) => {
@@ -31,3 +32,19 @@ module.exports.createNewReception = async (req, res) => {
         res.status(422).send('Error! Params not correct');
     }
 }
+
+module.exports.deleteReception = async (req, res, next) => {
+    console.log({_id: req.query.id})
+    Reception.deleteOne({ _id: req.query.id }).then((result) => {
+        Reception.find({ user_id: req.query.user_id }).then((result) => {
+            res.send({ result })
+        })
+    });
+};
+
+// module.exports.deleteAppointment = (req, res, next) => {
+//     Appointment.deleteOne({ _id: req.query.id }).then((result) =>
+//         Appointment.find({ user_id: req.query.user_id }).then((result) => {
+//             res.send({ result })
+//         }))
+// }

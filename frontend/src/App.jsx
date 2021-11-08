@@ -10,11 +10,13 @@ import {
 } from 'react-router-dom';
 import { BrowserRouter as Router } from 'react-router-dom';
 import M from 'materialize-css';
+import ModalEdit from './Modal/ModalEdit'
 
 function App() {
   // const routes = RegisterDiv()
   return (
       <div id='app'>
+        {/* <ModalEdit /> */}
         <Header />
         <RegisterDiv />
       </div>

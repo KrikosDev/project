@@ -6,14 +6,14 @@ const router = express.Router();
 
 const {
     createNewReception,
-    // getReceptions,
-    // deleteReception,
+    getReceptions,
+    deleteReception,
     // patchReception
   } = require('../controllers/reception-controllers');
 
-// router.get('/getReceptions', getReceptions);
+router.get('/getReceptions', getReceptions);
 router.post('/createNewReception', createNewReception);
-// router.delete('/deleteReception', deleteReception);
+router.delete('/deleteReception', deleteReception);
 // router.patch('/patchReception', patchReception);
 
 module.exports = router;

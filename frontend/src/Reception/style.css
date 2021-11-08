@@ -84,3 +84,89 @@ line-height: 21px;
     /* width: 100%; */
     margin-top: 200px;
 }
+
+.editReception {
+
+}
+
+.delete {
+    margin-left: 10px;
+}
+
+.trTableReception {
+    /* display: flex; */
+    width: 100%;
+    /* justify-content: space-between; */
+    /* height: 100%; */
+}
+
+.tableReception {
+    width: 100%;
+    border-collapse: collapse;
+    background-color:white;
+    border-top: 2px solid #000000;
+    border-bottom: 2px solid #000000;
+    margin-bottom: 50px;
+}
+
+.thName {
+    width: 25%;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    border-collapse: collapse;
+    border-left: 2px solid #000000;
+    border-right: 2px solid #000000;
+    padding: 10px;
+}
+
+.thDoctor {
+    width: 24%;
+    border: 0;
+    border-collapse: collapse;
+    border-left: 2px solid #000000;
+    border-right: 2px solid #000000;
+}
+
+.thDate {
+    width: 17%;
+    border: 0;
+    border-collapse: collapse;
+    border-left: 2px solid #000000;
+    border-right: 2px solid #000000;
+}
+
+.thComplaints{
+    width: 24%;
+    border: 0;
+    border-collapse: collapse;
+    border-left: 2px solid #000000;
+    border-right: 2px solid #000000;
+}
+
+.thIcon {
+    width: 10%;
+    border: 0;
+    border-collapse: collapse;
+    border-left: 2px solid #000000;
+    border-right: 2px solid #000000;
+    padding: 5px;
+    margin: 10px;
+    /* box-sizing: border-box; */
+}
+
+th {
+    font-family: Roboto;
+font-style: normal;
+font-weight: 300;
+font-size: 18px;
+line-height: 21px;
+}
+
+.editReception {
+    width: 24px;
+}
+
+.delete {
+    width: 20px;
+}   

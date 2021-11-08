@@ -8,4 +8,4 @@ const receptionScheme = new Schema({
     user_id: String
 })
 
-module.exports = model('Reception', receptionScheme)
+module.exports = model('Reception', receptionScheme) 

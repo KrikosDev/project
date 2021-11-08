@@ -5,14 +5,14 @@ import deleteIcon from '../deleteIcon.svg';
 
 function Table() {
     return (
-        <div className='tableDiv'>
+        <div className='tableDivTop'>
             <table className='table'>
                 <tr className='trTable' cellspacing='0'>
-                    <th>Имя</th>
-                    <th>Врач</th>
-                    <th>Дата</th>
-                    <th>Жалобы</th>
-                    <th></th>
+                    <th className='thNameHead'>Имя</th>
+                    <th className='thDoctorHead'>Врач</th>
+                    <th className='thDateHead'>Дата</th>
+                    <th className='thComplaintsHead'>Жалобы</th>
+                    <th className='thIconHead'></th>
                 </tr>
             </table>
         </div>

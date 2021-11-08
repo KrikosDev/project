@@ -2,6 +2,15 @@
     /* margin-top: 10%; */
     width: 100%;
     /* margin: 0 */
+    /* background-color: black; */
+    border: black;
+    border: 0;
+    border-collapse: collapse
+}
+
+.tableDivTop {
+    width: 100%;
+    background-color: #C4C4C4;
 }
 .trTable {
     background-color: #C4C4C4;
@@ -13,10 +22,11 @@
 }
 th {
     /* display: flex; */
-    width: 20%;
+    /* width: 10%; */
     margin: 0;
     /* justify-content: center; */
     height: 50px;
+    padding: 0;
 }
 
 .table {
@@ -25,4 +35,39 @@ th {
     /* background-color: #C4C4C4; */
     /* display: flex; */
 
+}
+
+.thNameHead {
+    width: 25%;
+    /* border-left: 1px solid #000000;
+    border-right: 1px solid #000000; */
+    /* box-sizing: border-box; */
+    margin: 0;
+    padding: 0;
+    border: 0;
+    border-collapse: collapse
+}
+
+.thDoctorHead {
+    width: 24%;
+    border: 0;
+    border-collapse: collapse
+}
+
+.thDateHead {
+    width: 17%;
+    border: 0;
+    border-collapse: collapse
+}
+
+.thComplaintsHead {
+    width: 24%;
+    border: 0;
+    border-collapse: collapse
+}
+
+.thIconHead {
+    width: 10%;
+    border: 0;
+    border-collapse: collapse;
 }

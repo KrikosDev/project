@@ -97,7 +97,7 @@ function Registration() {
                 <input
                     type='password'
                     className='inputRegis'
-                    placeholder='repeatPassword'
+                    placeholder='repeat Password'
                     min="6"
                     name='repeatPassword'
                     onChange={(e) => setRepeatPassword(e.target.value)}

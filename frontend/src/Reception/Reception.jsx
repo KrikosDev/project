@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import build from '../build.svg'
 import Register from "../Register/Register";
 import Authorization from '../Authorization/Authorization';
@@ -16,6 +16,9 @@ import Table from '../Table/Table'
 import axios from "axios";
 import DateFilter from '../DateSort/DateFilter'
 import moment from "moment";
+import edit from '../edit.svg'
+import deleteIcon from '../deleteIcon.svg'
+import ModalEdit from '../Modal/ModalEdit'
 
 function Reception() {
     const [user_id] = useState(localStorage.getItem('user_id'));
@@ -23,12 +26,49 @@ function Reception() {
     const [doctor, setDoctor] = useState();
     const [date, setDate] = useState();
     const [complaints, setComplaints] = useState();
+    const [editId, setEditId] = useState(null);
     const checkLength = /^[:;,\-@0-9a-zA-Zâéè'.\s]{2,235}$/;
     const token = localStorage.getItem('token')
     const history = useHistory()
     const [icon, setIcon] = useState(true)
     const [currentReception, setCurrentReception] = useState([])
-    const [reception, setReception] = useState([])
+    // const [reception, setReception] = useState([]);
+    // const [modalChange, setModalChange] = useState(false)
+    // const []
+
+
+    useEffect(async () => {
+        await axios
+            .get(`http://localhost:8000/reception/getReceptions?user_id=${user_id}`)
+            .then((res) =>
+                setCurrentReception(res.data.result)
+            )
+            .catch((e) => {
+                alert(
+                    `Ошибка ${e}`
+                )
+            })
+    })
+
+    const onClickRemove = async (id) => {
+        // console.log(item)
+        await axios
+            .delete(`http://localhost:8000/reception/deleteReception?id=${id}&user_id=${user_id}`)
+            .then((res) =>
+                setCurrentReception(res.data.result)
+            )
+            .catch((e) => {
+                alert(
+                    `Ошибка ${e}`
+                )
+            })
+    }
+
+    // const handleOpenChangeModal = (item) => {
+    //     // setSelectedRecept(recept);
+    //     setEditId(recept._id);
+    //     setModalChange(true);
+    //   };
 
     const createReception = async () => {
         {
@@ -46,7 +86,7 @@ function Reception() {
                     setDate('')
                     setDoctor('')
                     setComplaints('')
-                    console.log(res)
+                    console.log(currentReception)
                 })
                 .catch((e) => {
                     alert(
@@ -60,9 +100,9 @@ function Reception() {
         history.goBack();
     }
 
-    currentReception.map((item, index) => (
-        console.log(item)
-    ))
+    // currentReception.map((item, index) => (
+    //     console.log(item)
+    // ))
 
     return (
         <div className='receptionBig'>
@@ -127,17 +167,32 @@ function Reception() {
             <div className='tableDiv'>
                 <table className='tableReception'>
                     {currentReception.map((item, index) => (
+
                         <tr className='trTableReception' key={`tr-${index}`}>
-                            <th>{item.name}</th>
-                            <th>{item.doctor}</th>
-                            <th>{`${moment(item.date).format("DD.MM.YYYY")}`}</th>
-                            <th>{item.complaints}</th>
-                            <th></th>
+                            <th className='thName'>{item.name}</th>
+                            <th className='thDoctor' >{item.doctor}</th>
+                            <th className='thDate' >{`${moment(item.date).format("DD.MM.YYYY")}`}</th>
+                            <th className='thComplaints' >{item.complaints}</th>
+                            <th className='thIcon'>
+                                <img
+                                    src={edit}
+                                    alt='Пикчи нет'
+                                    className='editReception'
+                                // onClick={() => openModalEdit(item._id)}
+                                />
+                                <img
+                                    src={deleteIcon}
+                                    alt='Пикчи нет'
+                                    className='delete'
+                                    onClick={() => onClickRemove(item._id)}
+                                />
+                            </th>
                         </tr>
                     )
                     )}
                 </table>
             </div>
+            <ModalEdit />
         </div>
     )
 }
