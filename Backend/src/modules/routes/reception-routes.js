@@ -8,12 +8,12 @@ const {
     createNewReception,
     getReceptions,
     deleteReception,
-    // patchReception
+    patchReception
   } = require('../controllers/reception-controllers');
 
 router.get('/getReceptions', getReceptions);
 router.post('/createNewReception', createNewReception);
 router.delete('/deleteReception', deleteReception);
-// router.patch('/patchReception', patchReception);
+router.patch('/patchReception', patchReception);
 
 module.exports = router;

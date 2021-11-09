@@ -28,14 +28,17 @@
 }
 
 .middleModalEdit {
-    height: 481px;
+    height: 463px;
     width: 100%;
 }
 
 .footerModalEdit {
-    width: 100%;
+    /* position: absolute; */
+    width: 642px;
     height: 89px;
+    left: -2px;
 
+    /* background: #FFFFFF; */
     box-shadow: 0px 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
@@ -49,4 +52,214 @@
 
     margin-left: 40px;
     /* margin-top: 24px; */
+}
+
+.middleInput {
+    width: 572px;
+    height: 40px;
+    margin-left: 40px;
+
+    background: #FFFFFF;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    box-sizing: border-box;
+    border-radius: 4px;
+
+    font-family: Roboto;
+font-style: normal;
+font-weight: 300;
+font-size: 18px;
+line-height: 21px;
+padding-left: 20px;
+/* identical to box height */
+
+
+color: #000000;
+}
+
+.footerInput {
+    width: 572px;
+    height: 105px;
+    margin-left: 40px;
+
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    box-sizing: border-box;
+    border-radius: 4px;
+
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 18px;
+    line-height: 21px;
+    padding-left: 20px;
+    padding-bottom: 40px;
+/* identical to box height */
+
+
+color: #000000;
+}
+
+.pInput {
+    margin-left: 40px;
+
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 18px;
+    line-height: 21px;
+}
+
+.footerButton1 {
+    position: absolute;
+    width: 146px;
+    height: 40px;
+    left: 312px;
+    top: 597px;
+    
+    background: #FFFFFF;
+    border: 2px solid rgba(0, 0, 0, 0.2);
+    box-sizing: border-box;
+    border-radius: 4px;
+
+    font-family: Roboto;
+font-style: normal;
+font-weight: 300;
+font-size: 18px;
+line-height: 21px;
+/* identical to box height */
+
+
+color: #000000;
+}
+
+.footerButton2 {
+    position: absolute;
+    width: 146px;
+    height: 40px;
+    left: 470px;
+    top: 597px;
+
+    background: rgba(197, 233, 255, 0.72);
+    border: 2px solid rgba(197, 233, 255, 0.72);
+    box-sizing: border-box;
+
+    font-family: Roboto;
+font-style: normal;
+font-weight: 300;
+font-size: 18px;
+line-height: 21px;
+/* identical to box height */
+
+
+color: #000000;
+}
+
+.mainDeleteDiv {
+    position: fixed;
+width: 642px;
+height: 327px;
+/* left: 196px; */
+top: 280px;
+
+background: #FFFFFF;
+border-radius: 4px;
+}
+
+.headDeleteDiv {
+    width: 642px;
+height: 90px;
+left: 0px;
+top: 0px;
+
+background: #FFFFFF;
+box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.middleDeleteDiv {
+    height: 148px;
+}
+
+.footerDeleteDiv {
+    width: 642px;
+height: 89px;
+left: 0px;
+top: 235px;
+
+background: #FFFFFF;
+box-shadow: 4px 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.footerButtonDelete1 {
+    position: absolute;
+    width: 146px;
+    height: 40px;
+    left: 312px;
+    margin-top: 24px;
+    
+    background: #FFFFFF;
+    border: 2px solid rgba(0, 0, 0, 0.2);
+    box-sizing: border-box;
+    border-radius: 4px;
+
+    font-family: Roboto;
+font-style: normal;
+font-weight: 300;
+font-size: 18px;
+line-height: 21px;
+/* identical to box height */
+
+
+color: #000000;
+}
+
+.footerButtonDelete2 {
+    position: absolute;
+    width: 146px;
+    height: 40px;
+    left: 470px;
+    margin-top: 24px;
+
+    background: rgba(197, 233, 255, 0.72);
+    border: 2px solid rgba(197, 233, 255, 0.72);
+    box-sizing: border-box;
+
+    font-family: Roboto;
+font-style: normal;
+font-weight: 300;
+font-size: 18px;
+line-height: 21px;
+/* identical to box height */
+
+
+color: #000000;
+}
+
+.headDeleteP {
+    /* position: absolute; */
+    width: 253px;
+    height: 42px;
+    margin-left: 40px;
+    top: 24px;
+    
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 36px;
+    line-height: 42px;
+    
+    color: #000000;
+}
+
+.middleDeleteP {
+    width: 563px;
+height: 80px;
+margin-left: 44px;
+top: 120px;
+
+font-family: Roboto;
+font-style: normal;
+font-weight: 300;
+font-size: 24px;
+line-height: 28px;
+
+color: #000000;
 }

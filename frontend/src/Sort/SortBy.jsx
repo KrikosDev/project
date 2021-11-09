@@ -12,8 +12,8 @@ function SortBy({flag}) {
         <div className='sortBy'>
             <p className='sortText'>Сортировать по:</p>
             <select className='sortInput' onChange={(e) => flag(e.target.value)}>
-                        {sortArr.map(item => (
-                            <option>{item}</option>
+                        {sortArr.map((item, index) => (
+                            <option key={`doctor-${index}`} >{item}</option>
                         ))}
                     </select>
         </div>

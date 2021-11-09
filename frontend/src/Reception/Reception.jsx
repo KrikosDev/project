@@ -19,22 +19,29 @@ import moment from "moment";
 import edit from '../edit.svg'
 import deleteIcon from '../deleteIcon.svg'
 import ModalEdit from '../Modal/ModalEdit'
+import ModalDelete from '../Modal/ModalDelete'
 
 function Reception() {
     const [user_id] = useState(localStorage.getItem('user_id'));
     const [name, setName] = useState();
-    const [doctor, setDoctor] = useState();
+    const [doctor, setDoctor] = useState('');
     const [date, setDate] = useState();
     const [complaints, setComplaints] = useState();
     const [editId, setEditId] = useState(null);
+    const [editItem, setEditItem] = useState(null);
     const checkLength = /^[:;,\-@0-9a-zA-Zâéè'.\s]{2,235}$/;
     const token = localStorage.getItem('token')
-    const history = useHistory()
-    const [icon, setIcon] = useState(true)
-    const [currentReception, setCurrentReception] = useState([])
+    const history = useHistory();
+    const [icon, setIcon] = useState(true);
+    const [currentReception, setCurrentReception] = useState([]);
     // const [reception, setReception] = useState([]);
     // const [modalChange, setModalChange] = useState(false)
-    // const []
+    const [modalEditFlag, setModalEditFlag] = useState(false);
+    const [modalDeleteFlag, setModalDeleteFlag] = useState(false);
+
+    useEffect(() => {
+        console.log('doctor', doctor)
+    }, [doctor])
 
 
     useEffect(async () => {
@@ -51,11 +58,11 @@ function Reception() {
     })
 
     const onClickRemove = async (id) => {
-        // console.log(item)
         await axios
             .delete(`http://localhost:8000/reception/deleteReception?id=${id}&user_id=${user_id}`)
             .then((res) =>
-                setCurrentReception(res.data.result)
+                setCurrentReception(res.data.result),
+                setModalDeleteFlag(false)
             )
             .catch((e) => {
                 alert(
@@ -64,11 +71,18 @@ function Reception() {
             })
     }
 
-    // const handleOpenChangeModal = (item) => {
-    //     // setSelectedRecept(recept);
-    //     setEditId(recept._id);
-    //     setModalChange(true);
-    //   };
+    const openModalEdit = (item, id) => {
+        // setSelectedRecept(recept);
+        setEditItem(item);
+        setEditId(id);
+        setModalEditFlag(true);
+    };
+
+    const openModalDelete = (item) => {
+        // setSelectedRecept(recept);
+        setEditId(item);
+        setModalDeleteFlag(true);
+    };
 
     const createReception = async () => {
         {
@@ -86,7 +100,6 @@ function Reception() {
                     setDate('')
                     setDoctor('')
                     setComplaints('')
-                    console.log(currentReception)
                 })
                 .catch((e) => {
                     alert(
@@ -122,8 +135,8 @@ function Reception() {
                         onChange={(e) => setDoctor(e.target.value)}
                         value={doctor}
                     >
-                        {medics.map(item => (
-                            <option>{item}</option>
+                        {medics.map((item, index) => (
+                            <option key={`doctor-${index}`} value={item}>{item}</option>
                         ))}
                     </select>
                 </div>
@@ -168,7 +181,7 @@ function Reception() {
                 <table className='tableReception'>
                     {currentReception.map((item, index) => (
 
-                        <tr className='trTableReception' key={`tr-${index}`}>
+                        <tr className='trTableReception' key={`${item.id}-${index}-${user_id}`}>
                             <th className='thName'>{item.name}</th>
                             <th className='thDoctor' >{item.doctor}</th>
                             <th className='thDate' >{`${moment(item.date).format("DD.MM.YYYY")}`}</th>
@@ -178,13 +191,16 @@ function Reception() {
                                     src={edit}
                                     alt='Пикчи нет'
                                     className='editReception'
-                                // onClick={() => openModalEdit(item._id)}
+                                    onClick={() => openModalEdit(
+                                        item,
+                                        item._id
+                                    )}
                                 />
                                 <img
                                     src={deleteIcon}
                                     alt='Пикчи нет'
                                     className='delete'
-                                    onClick={() => onClickRemove(item._id)}
+                                    onClick={() => openModalDelete(item._id)}
                                 />
                             </th>
                         </tr>
@@ -192,7 +208,27 @@ function Reception() {
                     )}
                 </table>
             </div>
-            <ModalEdit />
+            {
+                modalEditFlag &&
+                <ModalEdit
+                    setCurrentReception={setCurrentReception}
+                    setModalEditFlag={setModalEditFlag}
+                    setNameOrig={setName}
+                    setDateOrig={setDate}
+                    setDoctorOrig={setDoctor}
+                    setComplaintsOrig={setComplaints}
+                    editItem={editItem}
+                    editId={editId}
+                />
+            }
+            {
+                modalDeleteFlag &&
+                <ModalDelete
+                    setModalDeleteFlag={setModalDeleteFlag}
+                    onClickRemove={onClickRemove}
+                    editId={editId}
+                />
+            }
         </div>
     )
 }
