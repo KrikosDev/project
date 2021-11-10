@@ -20,13 +20,16 @@ import edit from '../edit.svg'
 import deleteIcon from '../deleteIcon.svg'
 import ModalEdit from '../Modal/ModalEdit'
 import ModalDelete from '../Modal/ModalDelete'
+import CurrentReceptionTable from "../Table/CurrentReceptionTable";
+import SortReceptionTable from "../Table/SortReceptionTable";
+import _ from 'lodash';
 
 function Reception() {
     const [user_id] = useState(localStorage.getItem('user_id'));
-    const [name, setName] = useState();
+    const [name, setName] = useState('');
     const [doctor, setDoctor] = useState('');
-    const [date, setDate] = useState();
-    const [complaints, setComplaints] = useState();
+    const [date, setDate] = useState(null);
+    const [complaints, setComplaints] = useState('');
     const [editId, setEditId] = useState(null);
     const [editItem, setEditItem] = useState(null);
     const checkLength = /^[:;,\-@0-9a-zA-Zâéè'.\s]{2,235}$/;
@@ -34,15 +37,10 @@ function Reception() {
     const history = useHistory();
     const [icon, setIcon] = useState(true);
     const [currentReception, setCurrentReception] = useState([]);
-    // const [reception, setReception] = useState([]);
-    // const [modalChange, setModalChange] = useState(false)
+    const [reception, setReception] = useState([]);
     const [modalEditFlag, setModalEditFlag] = useState(false);
     const [modalDeleteFlag, setModalDeleteFlag] = useState(false);
-
-    useEffect(() => {
-        console.log('doctor', doctor)
-    }, [doctor])
-
+    const [sorting, setSorting] = useState({ key: 'none', dir: '' });
 
     useEffect(async () => {
         await axios
@@ -55,7 +53,49 @@ function Reception() {
                     `Ошибка ${e}`
                 )
             })
-    })
+    }, [])
+
+    useEffect(() => {
+        SortReception(sorting);
+    }, [currentReception]);
+
+    
+
+    const SortReception = (field) => {
+        let copyReception = currentReception.concat();
+        // const copyReception = currentReception.concat();
+        let key = field.key;
+        // console.log(key);
+
+        if (field.dir === 'up') {
+            let sortArr = _.sortBy((copyReception), (key), function (item) {
+                // console.log(item);
+                return item.key;
+            })
+            setReception(sortArr)
+        }
+
+
+        if (field.dir === 'down') {
+            let sortArr = _.sortBy((copyReception), (key), function (item) {
+                return item.key;
+            })
+            setReception(sortArr.reverse())
+        }
+
+        if (field.dir === '') {
+            setReception(copyReception)
+        }
+
+        // const sortArr = _.sortBy((copyReception), (key), function (item) {
+        //     return item.key;
+        // })
+        // setReception(sortArr)
+        
+
+    }
+
+    // SortReception(sorting)
 
     const onClickRemove = async (id) => {
         await axios
@@ -113,10 +153,6 @@ function Reception() {
         history.goBack();
     }
 
-    // currentReception.map((item, index) => (
-    //     console.log(item)
-    // ))
-
     return (
         <div className='receptionBig'>
             <div id='reception'>
@@ -169,7 +205,13 @@ function Reception() {
                 </button>
             </div>
             <div className='receptionMiddle'>
-                <Sort icon={icon} setIcon={setIcon} />
+                <Sort
+                    icon={icon}
+                    setIcon={setIcon}
+                    SortReception={SortReception}
+                    setSorting={setSorting}
+                    sorting={sorting}
+                />
             </div>
             <div className='dateFilter'>
                 {
@@ -178,45 +220,26 @@ function Reception() {
             </div>
             <Table />
             <div className='tableDiv'>
-                <table className='tableReception'>
-                    {currentReception.map((item, index) => (
 
-                        <tr className='trTableReception' key={`${item.id}-${index}-${user_id}`}>
-                            <th className='thName'>{item.name}</th>
-                            <th className='thDoctor' >{item.doctor}</th>
-                            <th className='thDate' >{`${moment(item.date).format("DD.MM.YYYY")}`}</th>
-                            <th className='thComplaints' >{item.complaints}</th>
-                            <th className='thIcon'>
-                                <img
-                                    src={edit}
-                                    alt='Пикчи нет'
-                                    className='editReception'
-                                    onClick={() => openModalEdit(
-                                        item,
-                                        item._id
-                                    )}
-                                />
-                                <img
-                                    src={deleteIcon}
-                                    alt='Пикчи нет'
-                                    className='delete'
-                                    onClick={() => openModalDelete(item._id)}
-                                />
-                            </th>
-                        </tr>
-                    )
-                    )}
-                </table>
+                <CurrentReceptionTable
+                    reception={reception}
+                    user_id={user_id}
+                    openModalEdit={openModalEdit}
+                    openModalDelete={openModalDelete}
+                />
+                {/* : <SortReceptionTable
+                    reception={reception}
+                    user_id={user_id}
+                    openModalEdit={openModalEdit}
+                    openModalDelete={openModalDelete}
+                    /> */}
+
             </div>
             {
                 modalEditFlag &&
                 <ModalEdit
                     setCurrentReception={setCurrentReception}
                     setModalEditFlag={setModalEditFlag}
-                    setNameOrig={setName}
-                    setDateOrig={setDate}
-                    setDoctorOrig={setDoctor}
-                    setComplaintsOrig={setComplaints}
                     editItem={editItem}
                     editId={editId}
                 />
@@ -231,6 +254,7 @@ function Reception() {
             }
         </div>
     )
+
 }
 
 export default Reception

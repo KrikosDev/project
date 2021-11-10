@@ -12,7 +12,6 @@ module.exports.getReceptions = async (req, res) => {
 
 module.exports.createNewReception = async (req, res) => {
     const body = req.body
-    // console.log(body);
     if (
         body.hasOwnProperty("name") &&
         body.hasOwnProperty("doctor") &&
@@ -34,7 +33,6 @@ module.exports.createNewReception = async (req, res) => {
 }
 
 module.exports.deleteReception = async (req, res) => {
-    console.log({ _id: req.query.id })
     Reception.deleteOne({ _id: req.query.id }).then((result) => {
         Reception.find({ user_id: req.query.user_id }).then((result) => {
             res.send({ result })
@@ -44,7 +42,6 @@ module.exports.deleteReception = async (req, res) => {
 
 module.exports.patchReception = (req, res) => {
     const body = req.body;
-    console.log(body)
 
     if (body.hasOwnProperty("name") &&
         body.hasOwnProperty("doctor") &&

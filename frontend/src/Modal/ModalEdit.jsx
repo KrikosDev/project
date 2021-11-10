@@ -14,10 +14,6 @@ import axios from "axios";
 
 function ModalEdit({
     setModalEditFlag,
-    setNameOrig,
-    setDoctorOrig,
-    setDateOrig,
-    setComplaintsOrig,
     editItem, 
     editId,
     setCurrentReception
@@ -103,7 +99,6 @@ function ModalEdit({
             </div>
         </div>
     )
-
 }
 
 export default ModalEdit

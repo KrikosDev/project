@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import {sortBy} from '../Constans'
+import { sortBy } from '../Constans'
 import {
     Switch,
     Route,
@@ -7,15 +7,27 @@ import {
     Redirect
 } from 'react-router-dom';
 
-function SortDirection() {
+function SortDirection({ setSorting, SortReception, sorting }) {
     return (
         <div className='sortBy'>
             <p className='sortText'>Направление:</p>
-            <select className='sortInput'>
-                        {sortBy.map(item => (
-                            <option>{item}</option>
-                        ))}
-                    </select>
+            <select
+                className='sortInput'
+                value={sorting.dir}
+                onChange={(e) => {
+                    setSorting({ key: sorting.key, dir: e.target.value });
+                    SortReception({ key: sorting.key, dir: e.target.value });
+                }}
+            >
+                {sortBy.map((item, index) => (
+                    <option
+                        key={`${item.id}-${index} направление`}
+                        value={item.key}
+                    >
+                        {item.name}
+                    </option>
+                ))}
+            </select>
         </div>
     )
 }

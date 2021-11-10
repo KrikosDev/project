@@ -12,37 +12,75 @@ import DateIcon from '../DateSort/DateIcon'
 
 import './style.css'
 
-function Sort({icon, setIcon}) {
+function Sort({ icon, setIcon, SortReception, setSorting, sorting }) {
     const [flag, setFlag] = useState()
+    console.log(sorting);
 
-    if (flag !== '' && flag !== undefined && icon){
+    if (flag !== 'none' && flag !== undefined && icon) {
         return (
             <div className='sortDiv'>
-                <SortBy flag={setFlag} />
-                <SortDirection />
-                <DateIcon setIcon={setIcon} />
+                <SortBy 
+                flag={setFlag} 
+                SortReception={SortReception}
+                setSorting={setSorting}
+                sorting={sorting}
+                />
+                <SortDirection 
+                setSorting={setSorting}
+                SortReception={SortReception}
+                sorting={sorting}
+                />
+                <DateIcon setIcon={setIcon}
+                sorting={sorting}
+                />
             </div>
-        )}
-    if (flag !== '' && flag !== undefined && !icon){
+        )
+    }
+    if (flag !== 'none' && flag !== undefined && !icon || flag === 'none' && !icon ) {
         return (
             <div className='sortDiv'>
-                <SortBy flag={setFlag} />
-                <SortDirection />
+                <SortBy 
+                flag={setFlag} 
+                SortReception={SortReception}
+                setSorting={setSorting}
+                sorting={sorting}
+                />
+                <SortDirection 
+                setSorting={setSorting}
+                SortReception={SortReception}
+                sorting={sorting}
+                />
             </div>
-        )}
-    if (icon) {    
-    return (
-        <div className='sortDiv'>
-            <SortBy flag={setFlag} />
-            <DateIcon setIcon={setIcon} />
-        </div>
-    )}
-    if (!icon) {    
+        )
+    }
+    if (icon) {
         return (
             <div className='sortDiv'>
-                <SortBy flag={setFlag} />
+                <SortBy 
+                flag={setFlag} 
+                SortReception={SortReception}
+                setSorting={setSorting}
+                SortReception={SortReception}
+                sorting={sorting}
+                />
+                <DateIcon 
+                setIcon={setIcon} 
+                sorting={sorting}
+                />
             </div>
-        )}
+        )
+    }
+    if (!icon) {
+        return (
+            <div className='sortDiv'>
+                <SortBy 
+                flag={setFlag} 
+                SortReception={SortReception}
+                setSorting={setSorting}
+                />
+            </div>
+        )
+    }
 }
 
 export default Sort

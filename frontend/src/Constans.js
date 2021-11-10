@@ -8,13 +8,13 @@ export const medics = [
 ]
 
 export const sortArr = [
-    '',
-    'Имя',
-    'Дата',
-    'Врач'
+    { key: 'none', name: "" },
+    { key: "name", name: "Имя" },
+    { key: "doctor", name: "Врач" },
+    { key: "date", name: "Дата" },
 ]
 
 export const sortBy = [
-    'По возрастанию',
-    'По убыванию'
-]
+    {key: "up", name: "По возрастанию"},
+    {key: "down", name: "По убыванию"}
+  ]
