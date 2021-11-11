@@ -8,7 +8,6 @@ import {
 } from 'react-router-dom';
 
 function SortBy({ flag, SortReception, setSorting, sorting }) {
-    // console.log(sorting);
     return (
         <div className='sortBy'>
             <p className='sortText'>Сортировать по:</p>

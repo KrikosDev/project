@@ -14,7 +14,6 @@ import './style.css'
 
 function Sort({ icon, setIcon, SortReception, setSorting, sorting }) {
     const [flag, setFlag] = useState()
-    console.log(sorting);
 
     if (flag !== 'none' && flag !== undefined && icon) {
         return (
@@ -77,6 +76,7 @@ function Sort({ icon, setIcon, SortReception, setSorting, sorting }) {
                 flag={setFlag} 
                 SortReception={SortReception}
                 setSorting={setSorting}
+                sorting={sorting}
                 />
             </div>
         )

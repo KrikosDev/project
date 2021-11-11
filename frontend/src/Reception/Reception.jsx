@@ -38,9 +38,12 @@ function Reception() {
     const [icon, setIcon] = useState(true);
     const [currentReception, setCurrentReception] = useState([]);
     const [reception, setReception] = useState([]);
+    const [filtReception, setFiltReception] = useState([]);
     const [modalEditFlag, setModalEditFlag] = useState(false);
     const [modalDeleteFlag, setModalDeleteFlag] = useState(false);
-    const [sorting, setSorting] = useState({ key: 'none', dir: '' });
+    const [sorting, setSorting] = useState({ key: "none", dir: '' });
+    const [startDate, setStartDate] = useState(null)
+    const [endDate, setEndDate] = useState(null)
 
     useEffect(async () => {
         await axios
@@ -55,21 +58,63 @@ function Reception() {
             })
     }, [])
 
+    const FilterReception = (startDate, endDate) => {
+        let copyReceptionForFilter = reception
+        const startFiltDate = moment(startDate).format('YYYY-MM-DD')
+        const endFiltDate = moment(endDate).format('YYYY-MM-DD');
+
+        if(endDate === null || !endDate) {
+            let newReceptionForFilter = copyReceptionForFilter.filter((item) => {
+                return item.date >= startDate
+            });
+            setFiltReception(newReceptionForFilter)
+        }
+        if(startDate === null || !startDate) {
+            let newReceptionForFilter = copyReceptionForFilter.filter((item) => {
+                return moment(moment(item.date).format('YYYY-MM-DD')).isSame(endFiltDate) || moment(moment(endFiltDate).format('YYYY-MM-DD')).isAfter(item.date)
+            });
+            setFiltReception(newReceptionForFilter)
+        } 
+        if(startDate !== null && endDate !== null && startDate && endDate) {
+            let newReceptionForFilter = copyReceptionForFilter.filter((item) => {
+                return moment(item.date).isBetween(startFiltDate, endFiltDate)
+                || moment(moment(item.date).format('YYYY-MM-DD')).isSame(startFiltDate) || moment(moment(item.date).format('YYYY-MM-DD')).isSame(endFiltDate);
+            });
+            setFiltReception(newReceptionForFilter)
+        } 
+        if (!startDate && !endDate) {
+            let newReceptionForFilter = copyReceptionForFilter.map((item) => {
+                return item
+            });
+            setFiltReception(newReceptionForFilter)
+        }
+        if (icon === true && startDate === null && endDate === null ) {
+            setFiltReception(copyReceptionForFilter)
+        }
+    }
+
+    useEffect(() => {
+        setStartDate(null)
+        setEndDate(null)
+        SortReception(sorting);
+        setFiltReception(reception)
+    }, [icon]);
+
     useEffect(() => {
         SortReception(sorting);
     }, [currentReception]);
 
-    
+    useEffect(() => {
+        FilterReception(startDate, endDate);
+    }, [reception]);
+
 
     const SortReception = (field) => {
         let copyReception = currentReception.concat();
-        // const copyReception = currentReception.concat();
         let key = field.key;
-        // console.log(key);
 
         if (field.dir === 'up') {
             let sortArr = _.sortBy((copyReception), (key), function (item) {
-                // console.log(item);
                 return item.key;
             })
             setReception(sortArr)
@@ -86,16 +131,7 @@ function Reception() {
         if (field.dir === '') {
             setReception(copyReception)
         }
-
-        // const sortArr = _.sortBy((copyReception), (key), function (item) {
-        //     return item.key;
-        // })
-        // setReception(sortArr)
-        
-
     }
-
-    // SortReception(sorting)
 
     const onClickRemove = async (id) => {
         await axios
@@ -112,14 +148,12 @@ function Reception() {
     }
 
     const openModalEdit = (item, id) => {
-        // setSelectedRecept(recept);
         setEditItem(item);
         setEditId(id);
         setModalEditFlag(true);
     };
 
     const openModalDelete = (item) => {
-        // setSelectedRecept(recept);
         setEditId(item);
         setModalDeleteFlag(true);
     };
@@ -215,24 +249,37 @@ function Reception() {
             </div>
             <div className='dateFilter'>
                 {
-                    !icon && <DateFilter setIcon={setIcon} />
+                    !icon &&
+                    <DateFilter
+                        setIcon={setIcon}
+                        endDate={endDate}
+                        startDate={startDate}
+                        setEndDate={setEndDate}
+                        setStartDate={setStartDate}
+                        FilterReception={FilterReception}
+                    />
                 }
             </div>
             <Table />
             <div className='tableDiv'>
 
-                <CurrentReceptionTable
+                {
+                    icon ? <CurrentReceptionTable
                     reception={reception}
                     user_id={user_id}
                     openModalEdit={openModalEdit}
                     openModalDelete={openModalDelete}
                 />
-                {/* : <SortReceptionTable
-                    reception={reception}
+                    :
+                <CurrentReceptionTable
+                    reception={filtReception}
                     user_id={user_id}
                     openModalEdit={openModalEdit}
                     openModalDelete={openModalDelete}
-                    /> */}
+                />
+                
+                }
+                
 
             </div>
             {
