@@ -1,11 +1,5 @@
-import React, { useState } from "react";
-import { sortBy } from '../Constans'
-import {
-    Switch,
-    Route,
-    Link,
-    Redirect
-} from 'react-router-dom';
+import React from "react";
+import { sortBy } from '../Constans';
 
 function SortDirection({ setSorting, SortReception, sorting }) {
     return (

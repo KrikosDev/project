@@ -1,12 +1,4 @@
-import React, { useEffect, useState } from "react";
-import {
-    Switch,
-    Route,
-    Link,
-    Redirect,
-    useHistory
-} from 'react-router-dom';
-import Reception from '../Reception/Reception';
+import React, { useState } from "react";
 import './style.css'
 import { medics } from '../Constans'
 import moment from "moment";
@@ -14,7 +6,7 @@ import axios from "axios";
 
 function ModalEdit({
     setModalEditFlag,
-    editItem, 
+    editItem,
     editId,
     setCurrentReception
 }

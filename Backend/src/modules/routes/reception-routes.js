@@ -1,9 +1,6 @@
 const express = require('express');
 const router = express.Router();
 
-
-// /user/register
-
 const {
     createNewReception,
     getReceptions,

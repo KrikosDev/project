@@ -7,8 +7,9 @@ import deleteIcon from '../deleteIcon.svg'
 function CurrentReceptionTable({ openModalEdit, openModalDelete, reception, user_id }) {
     return (
         <table className='tableReception'>
+            <thead></thead>
+            <tbody>
                     {reception.map((item, index) => (
-
                         <tr className='trTableReception' key={`${item.id}-${index}-${user_id}`}>
                             <th className='thName'>{item.name}</th>
                             <th className='thDoctor' >{item.doctor}</th>
@@ -34,6 +35,7 @@ function CurrentReceptionTable({ openModalEdit, openModalDelete, reception, user
                         </tr>
                     )
                     )}
+                    </tbody>
                 </table>
     )
 }

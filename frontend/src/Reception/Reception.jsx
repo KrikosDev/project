@@ -1,12 +1,5 @@
 import React, { useEffect, useState } from "react";
-import build from '../build.svg'
-import Register from "../Register/Register";
-import Authorization from '../Authorization/Authorization';
 import {
-    Switch,
-    Route,
-    Link,
-    Redirect,
     useHistory
 } from 'react-router-dom';
 import { medics } from '../Constans'
@@ -16,34 +9,30 @@ import Table from '../Table/Table'
 import axios from "axios";
 import DateFilter from '../DateSort/DateFilter'
 import moment from "moment";
-import edit from '../edit.svg'
-import deleteIcon from '../deleteIcon.svg'
 import ModalEdit from '../Modal/ModalEdit'
 import ModalDelete from '../Modal/ModalDelete'
 import CurrentReceptionTable from "../Table/CurrentReceptionTable";
-import SortReceptionTable from "../Table/SortReceptionTable";
 import _ from 'lodash';
 
 function Reception() {
     const [user_id] = useState(localStorage.getItem('user_id'));
     const [name, setName] = useState('');
     const [doctor, setDoctor] = useState('');
-    const [date, setDate] = useState(null);
+    const [date, setDate] = useState(undefined);
     const [complaints, setComplaints] = useState('');
-    const [editId, setEditId] = useState(null);
-    const [editItem, setEditItem] = useState(null);
-    const checkLength = /^[:;,\-@0-9a-zA-Zâéè'.\s]{2,235}$/;
+    const [editId, setEditId] = useState(undefined);
+    const [editItem, setEditItem] = useState(undefined);
     const token = localStorage.getItem('token')
     const history = useHistory();
     const [icon, setIcon] = useState(true);
     const [currentReception, setCurrentReception] = useState([]);
     const [reception, setReception] = useState([]);
     const [filtReception, setFiltReception] = useState([]);
-    const [modalEditFlag, setModalEditFlag] = useState(false);
-    const [modalDeleteFlag, setModalDeleteFlag] = useState(false);
+    const [modalEditFlag, setModalEditFlag] = useState(undefined);
+    const [modalDeleteFlag, setModalDeleteFlag] = useState(undefined);
     const [sorting, setSorting] = useState({ key: "none", dir: '' });
-    const [startDate, setStartDate] = useState(null)
-    const [endDate, setEndDate] = useState(null)
+    const [startDate, setStartDate] = useState(undefined)
+    const [endDate, setEndDate] = useState(undefined)
 
     useEffect(async () => {
         await axios
@@ -63,32 +52,32 @@ function Reception() {
         const startFiltDate = moment(startDate).format('YYYY-MM-DD')
         const endFiltDate = moment(endDate).format('YYYY-MM-DD');
 
-        if(endDate === null || !endDate) {
+        if (endDate === null || !endDate) {
             let newReceptionForFilter = copyReceptionForFilter.filter((item) => {
                 return item.date >= startDate
             });
             setFiltReception(newReceptionForFilter)
         }
-        if(startDate === null || !startDate) {
+        if (startDate === null || !startDate) {
             let newReceptionForFilter = copyReceptionForFilter.filter((item) => {
                 return moment(moment(item.date).format('YYYY-MM-DD')).isSame(endFiltDate) || moment(moment(endFiltDate).format('YYYY-MM-DD')).isAfter(item.date)
             });
             setFiltReception(newReceptionForFilter)
-        } 
-        if(startDate !== null && endDate !== null && startDate && endDate) {
+        }
+        if (startDate !== null && endDate !== null && startDate && endDate) {
             let newReceptionForFilter = copyReceptionForFilter.filter((item) => {
                 return moment(item.date).isBetween(startFiltDate, endFiltDate)
-                || moment(moment(item.date).format('YYYY-MM-DD')).isSame(startFiltDate) || moment(moment(item.date).format('YYYY-MM-DD')).isSame(endFiltDate);
+                    || moment(moment(item.date).format('YYYY-MM-DD')).isSame(startFiltDate) || moment(moment(item.date).format('YYYY-MM-DD')).isSame(endFiltDate);
             });
             setFiltReception(newReceptionForFilter)
-        } 
+        }
         if (!startDate && !endDate) {
             let newReceptionForFilter = copyReceptionForFilter.map((item) => {
                 return item
             });
             setFiltReception(newReceptionForFilter)
         }
-        if (icon === true && startDate === null && endDate === null ) {
+        if (icon === true && startDate === null && endDate === null) {
             setFiltReception(copyReceptionForFilter)
         }
     }
@@ -265,21 +254,21 @@ function Reception() {
 
                 {
                     icon ? <CurrentReceptionTable
-                    reception={reception}
-                    user_id={user_id}
-                    openModalEdit={openModalEdit}
-                    openModalDelete={openModalDelete}
-                />
-                    :
-                <CurrentReceptionTable
-                    reception={filtReception}
-                    user_id={user_id}
-                    openModalEdit={openModalEdit}
-                    openModalDelete={openModalDelete}
-                />
-                
+                        reception={reception}
+                        user_id={user_id}
+                        openModalEdit={openModalEdit}
+                        openModalDelete={openModalDelete}
+                    />
+                        :
+                        <CurrentReceptionTable
+                            reception={filtReception}
+                            user_id={user_id}
+                            openModalEdit={openModalEdit}
+                            openModalDelete={openModalDelete}
+                        />
+
                 }
-                
+
 
             </div>
             {

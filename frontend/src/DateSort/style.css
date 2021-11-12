@@ -2,17 +2,16 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    /* margin: 100px; */
 }
 
 .filterButton {
     background: #FFFFFF;
-border: 1px solid rgba(0, 0, 0, 0.2);
-box-sizing: border-box;
-border-radius: 4px; 
-width: 200px;
-height: 47px;
-font-family: Roboto;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    box-sizing: border-box;
+    border-radius: 4px; 
+    width: 200px;
+    height: 47px;
+    font-family: Roboto;
     font-style: normal;
     font-weight: 300;
     font-size: 18px;
@@ -31,8 +30,6 @@ font-family: Roboto;
 }
 
 .vector {
-    /* width: 30px;
-    height: 10px; */
     margin: 10px;
 }
 

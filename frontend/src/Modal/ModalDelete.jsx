@@ -1,14 +1,5 @@
-import React, { useEffect, useState } from "react";
-import {
-    Switch,
-    Route,
-    Link,
-    Redirect,
-    useHistory
-} from 'react-router-dom';
-import Reception from '../Reception/Reception';
+import React from "react";
 import './style.css'
-import { medics } from '../Constans'
 
 function ModalEdit({ setModalDeleteFlag, onClickRemove, editId }) {
 
@@ -34,7 +25,6 @@ function ModalEdit({ setModalDeleteFlag, onClickRemove, editId }) {
             </div>
         </div>
     )
-
 }
 
 export default ModalEdit

@@ -7,6 +7,8 @@ import deleteIcon from '../deleteIcon.svg'
 function SortReceptionTable({ openModalEdit, openModalDelete, reception, user_id }) {
     return (
         <table className='tableReception'>
+            <thead></thead>
+            <tbody>
                     {reception.map((item, index) => (
 
                         <tr className='trTableReception' key={`${item.id}-${index}-${user_id}`}>
@@ -34,6 +36,7 @@ function SortReceptionTable({ openModalEdit, openModalDelete, reception, user_id
                         </tr>
                     )
                     )}
+                    </tbody>
                 </table>
     )
 }

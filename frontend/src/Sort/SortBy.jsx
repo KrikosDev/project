@@ -1,11 +1,5 @@
 import React from "react";
-import { sortArr } from '../Constans'
-import {
-    Switch,
-    Route,
-    Link,
-    Redirect
-} from 'react-router-dom';
+import { sortArr } from '../Constans';
 
 function SortBy({ flag, SortReception, setSorting, sorting }) {
     return (

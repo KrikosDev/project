@@ -1,15 +1,11 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState } from "react";
 import build from '../build.svg'
 import './style.css';
 import {
-    Switch,
-    Route,
     Link,
-    Redirect,
     useHistory
 } from 'react-router-dom';
 import axios from "axios";
-import M from 'materialize-css';
 
 function Registration() {
     const [login, setLogin] = useState("");
@@ -21,50 +17,48 @@ function Registration() {
     let history = useHistory();
 
     const createUser = async () => {
-            if (checkLength.test(login)) {
-                if (
-                    checkLang.test(password) &&
-                    checkContent.test(password) &&
-                    checkLength.test(password)
-                ) {
-                    if (password === repeatPassword) {
-                        await axios
-                            .post(`http://localhost:8000/user/createNewUser`, {
-                                login,
-                                password,
-                            })
-                            .then((result) => {
-                                localStorage.setItem('token', result.data.Token);
-                                localStorage.setItem('user_id', result.data.user._id);
-                                history.push('/Reception');
-                            })
-                            .catch((e) => {
-                                alert (
-                                    'Ошибка'
-                                )
-                            })
-                    } else {
-                        alert('Проверьте правильность введенных данных');
-                    }
-
+        if (checkLength.test(login)) {
+            if (
+                checkLang.test(password) &&
+                checkContent.test(password) &&
+                checkLength.test(password)
+            ) {
+                if (password === repeatPassword) {
+                    await axios
+                        .post(`http://localhost:8000/user/createNewUser`, {
+                            login,
+                            password,
+                        })
+                        .then((result) => {
+                            localStorage.setItem('token', result.data.Token);
+                            localStorage.setItem('user_id', result.data.user._id);
+                            history.push('/Reception');
+                        })
+                        .catch((e) => {
+                            alert(
+                                'Ошибка'
+                            )
+                        })
                 } else {
-                    alert(
-                        `Пароль должен состоять только из латинских букв, быть длинной не менее 6 символов и иметь хотя бы 1 цифру`
-                    );
+                    alert('Проверьте правильность введенных данных');
                 }
 
             } else {
                 alert(
-                    'Короткий логин'
-                )
-                // M.toast({ html: `Привет, Нео`, class: 'modal-trigger' })
+                    `Пароль должен состоять только из латинских букв, быть длинной не менее 6 символов и иметь хотя бы 1 цифру`
+                );
             }
-        
+
+        } else {
+            alert(
+                'Короткий логин'
+            )
+        }
     }
 
 
     return (
-        <div class='boxRegister'>
+        <div className='boxRegister'>
             <div id='divBuild'><img src={build} alt='Нема пикчи' id='build'></img></div>
             <div id='register'>
                 <h2 className='regisH2'>
@@ -97,7 +91,7 @@ function Registration() {
                 <input
                     type='password'
                     className='inputRegis'
-                    placeholder='repeat Password'
+                    placeholder='Password'
                     min="6"
                     name='repeatPassword'
                     onChange={(e) => setRepeatPassword(e.target.value)}

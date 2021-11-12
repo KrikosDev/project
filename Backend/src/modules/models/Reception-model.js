@@ -1,4 +1,4 @@
-const {Schema, model, Types} = require('mongoose')
+const { Schema, model } = require('mongoose')
 
 const receptionScheme = new Schema({
     name: {type: String, unique: true, required: true},

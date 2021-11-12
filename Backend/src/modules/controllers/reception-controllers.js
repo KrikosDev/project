@@ -1,7 +1,4 @@
-const bcrypt = require('bcrypt')
-const jwt = require('jsonwebtoken')
 const Reception = require('../models/Reception-model')
-const { check, validationResult } = require('express-validator')
 
 module.exports.getReceptions = async (req, res) => {
     await Reception.find({ user_id: req.query.user_id })
@@ -64,27 +61,3 @@ module.exports.patchReception = (req, res) => {
         res.status(422).send('Ошибка данных')
     }
 }
-
-// module.exports.patchReception = (req, res, next) => {
-//     const body = req.body;
-
-//     if (body.hasOwnProperty("name")
-//         && body.hasOwnProperty("date")
-//         && body.hasOwnProperty("doctor")
-//         && body.hasOwnProperty("complaints")) {
-//         Reception.updateOne(
-//             { _id: body._id },
-//             {
-//                 name: body.name,
-//                 date: body.date,
-//                 doctor: body.doctor,
-//                 complaint: body.complaint
-//             }
-//         ).then((result) => {
-//             Reception.find({ user_id: body.user_id }).then((result) => {
-//                 res.send({ result })
-//             })
-//         })
-//     } else {
-//         res.status(422).send("error");
-//     }

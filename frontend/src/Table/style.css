@@ -1,8 +1,5 @@
 .tableDiv{
-    /* margin-top: 10%; */
     width: 100%;
-    /* margin: 0 */
-    /* background-color: black; */
     border: black;
     border: 0;
     border-collapse: collapse
@@ -16,15 +13,16 @@
     background-color: #C4C4C4;
     width: 100%;
     margin: 0;
-    /* display: flex; */
-    /* flex-direction: row; */
-    /* height: 50px; */
 }
-th {
-    /* display: flex; */
-    /* width: 10%; */
+
+/* .trTableReception {
+    background-color: #C4C4C4;
+    width: 100%;
     margin: 0;
-    /* justify-content: center; */
+} */
+
+th {
+    margin: 0;
     height: 50px;
     padding: 0;
 }
@@ -32,16 +30,10 @@ th {
 .table {
     margin: 0;
     width: 100%;
-    /* background-color: #C4C4C4; */
-    /* display: flex; */
-
 }
 
 .thNameHead {
     width: 25%;
-    /* border-left: 1px solid #000000;
-    border-right: 1px solid #000000; */
-    /* box-sizing: border-box; */
     margin: 0;
     padding: 0;
     border: 0;

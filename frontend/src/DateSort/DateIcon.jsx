@@ -1,11 +1,4 @@
-import React, { useState } from "react";
-import { sortBy } from '../Constans'
-import {
-    Switch,
-    Route,
-    Link,
-    Redirect
-} from 'react-router-dom';
+import React from "react";
 import vector from '../vector.svg'
 
 function DateIcon({setIcon}) {

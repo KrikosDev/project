@@ -1,12 +1,12 @@
 import React from 'react';
 import './style.css';
-import edit from '../edit.svg';
-import deleteIcon from '../deleteIcon.svg';
 
 function Table() {
     return (
         <div className='tableDivTop'>
             <table className='table'>
+            <thead></thead>
+            <tbody>
                     <tr className='trTable' cellSpacing='0'>
                         <th className='thNameHead'>Имя</th>
                         <th className='thDoctorHead'>Врач</th>
@@ -14,6 +14,7 @@ function Table() {
                         <th className='thComplaintsHead'>Жалобы</th>
                         <th className='thIconHead'></th>
                     </tr>
+                    </tbody>
             </table>
         </div>
     );

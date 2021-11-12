@@ -15,17 +15,6 @@ export const sortArr = [
 ]
 
 export const sortBy = [
-    {key: "up", name: "По возрастанию"},
-    {key: "down", name: "По убыванию"}
-  ]
-
-
-          // let startExactDate = moment(startDate).format('YYYY-MM-DD');
-        // let endExactDate = moment(endDate).format('YYYY-MM-DD');
-
-        // moment(item.date).isBetween(startExactDate, endExactDate)
-        //         || moment(moment(item.date).format('YYYY-MM-DD')).isSame(startExactDate) || moment(moment(item.date).format('YYYY-MM-DD')).isSame(endExactDate)
-
-        // if(endDate >= item.date && startDate <= item.date){
-        //     return item
-        // }
+    { key: "up", name: "По возрастанию" },
+    { key: "down", name: "По убыванию" }
+]

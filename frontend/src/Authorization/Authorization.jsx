@@ -1,16 +1,11 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState } from "react";
 import build from '../build.svg'
 import './style.css';
 import {
-    Switch,
-    Route,
     Link,
-    Redirect,
     useHistory
 } from 'react-router-dom';
 import axios from 'axios';
-import { useMessage } from "../hooks/message.hook";
-import M from 'materialize-css';
 
 function Authorization() {
     const [login, setLogin] = useState("")
@@ -35,14 +30,14 @@ function Authorization() {
                 else if (e.response.status === 404) {
                     alert(`Пользователя ${login} не существует, пройдите регистрацию`)
                 } else {
-                    alert ('Неизвестная ошибка')
+                    alert('Неизвестная ошибка')
                 }
-            
+
             })
     }
 
     return (
-        <div class='boxAuthoris'>
+        <div className='boxAuthoris'>
             <div id='divBuild'><img src={build} alt='Нема пикчи' id='build'></img></div>
             <div id='register'>
                 <h2 className='authorizH2'>Войти в систему</h2>

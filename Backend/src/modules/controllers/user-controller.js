@@ -1,14 +1,8 @@
-// const config = require('config')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 const User = require('../models/User-model')
-const { check, validationResult } = require('express-validator')
 
 module.exports.createNewUser =
-    // [
-    //     check('login', 'Логин должен состоять миниум из 6 символов').isLength({ min: 6 }),
-    //     check('password', 'Пароль должен состоять миниум из 6 символов').isLength({ min: 6 })
-    // ],
 
     async (req, res) => {
         const body = req.body;

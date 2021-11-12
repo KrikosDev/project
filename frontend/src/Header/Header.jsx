@@ -1,11 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import './style.css'
 import bandAid from '../band-aid.svg'
 import {
     Switch,
     Route,
-    Link,
-    Redirect,
     useHistory
 } from 'react-router-dom';
 
@@ -16,7 +14,6 @@ function Header() {
         localStorage.removeItem('token')
         localStorage.removeItem('user_id')
         history.push("/Authorization")
-        // history.goBack();
     }
 
     return (
@@ -27,11 +24,13 @@ function Header() {
                         <h1>Войти в систему</h1>
                     </Route>
                     <Route path="/Register">
-                        <h1>Зарегестрироваться в системе</h1>
+                        <h1>Зарегистрироваться в системе</h1>
                     </Route>
                     <Route path="/Reception">
                         <h1>Приёмы</h1>
-                        <button className='exit' onClick={() => deleteHistory()}>Выход</button>
+                        <button className='exit' onClick={() => deleteHistory()}>
+                            Выход
+                            </button>
                     </Route>
                 </Switch>
         </div>
