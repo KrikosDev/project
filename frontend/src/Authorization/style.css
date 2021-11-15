@@ -1,0 +1,78 @@
+#register {
+    display: flex;
+    flex-direction: column ;
+    padding: 60px;
+}
+
+.boxAuthoris {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+input {
+    width: 100%;
+    height: 40px;
+    left: 575px;
+    top: 309px;
+
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    box-sizing: border-box;
+    border-radius: 4px;
+}
+
+.p {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 18px;
+    line-height: 21px;
+}
+
+#buttonAuthoris {
+    padding: 10px;
+    margin-top: 147px;
+    margin-left: 56.5%;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 18px;
+    line-height: 21px;
+    
+    background: #FFFFFF;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    box-sizing: border-box;
+    border-radius: 4px;
+}
+
+#buttonRegis {
+    margin-top: 15px;
+    margin-left: 228px;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 18px;
+    line-height: 21px;
+}
+
+.authorizH2 {
+    height: 42px;
+    left: 596px;
+    top: 198px;
+
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 36px;
+    line-height: 42px;
+    margin: 0;
+    margin-bottom: 20px;
+    margin-left: 70px;
+
+}
+
+.pRegis {
+    text-decoration: none;
+    color: black;
+    margin-right: 30px;
+}

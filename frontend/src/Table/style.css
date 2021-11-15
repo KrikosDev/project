@@ -1,0 +1,65 @@
+.tableDiv{
+    width: 100%;
+    border: black;
+    border: 0;
+    border-collapse: collapse
+}
+
+.tableDivTop {
+    width: 100%;
+    background-color: #C4C4C4;
+}
+.trTable {
+    background-color: #C4C4C4;
+    width: 100%;
+    margin: 0;
+}
+
+/* .trTableReception {
+    background-color: #C4C4C4;
+    width: 100%;
+    margin: 0;
+} */
+
+th {
+    margin: 0;
+    height: 50px;
+    padding: 0;
+}
+
+.table {
+    margin: 0;
+    width: 100%;
+}
+
+.thNameHead {
+    width: 25%;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    border-collapse: collapse
+}
+
+.thDoctorHead {
+    width: 24%;
+    border: 0;
+    border-collapse: collapse
+}
+
+.thDateHead {
+    width: 17%;
+    border: 0;
+    border-collapse: collapse
+}
+
+.thComplaintsHead {
+    width: 24%;
+    border: 0;
+    border-collapse: collapse
+}
+
+.thIconHead {
+    width: 10%;
+    border: 0;
+    border-collapse: collapse;
+}

@@ -1,0 +1,42 @@
+.DateFilterDiv {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.filterButton {
+    background: #FFFFFF;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    box-sizing: border-box;
+    border-radius: 4px; 
+    width: 200px;
+    height: 47px;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 18px;
+    line-height: 21px;
+}
+
+.dateInput {
+    margin: 30px;
+    width: 300px;
+    height: 47px;
+}
+
+.deleteIcon {
+    width: 105px;
+    height: 35px;
+}
+
+.vector {
+    margin: 10px;
+}
+
+.dateText {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 18px;
+    line-height: 21px;
+}
